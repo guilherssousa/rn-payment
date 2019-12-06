@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, ScrollView, View, Text, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -24,10 +24,7 @@ export default function Home() {
     }, []);
 
     return (
-        <ScrollView
-            showsVerticalScrollIndicator={false}
-            style={styles.container}
-        >
+        <View style={styles.container} >
             <LinearGradient
                 style={styles.navbar}
                 colors={['#de6262', '#ffb88c']}
@@ -40,49 +37,50 @@ export default function Home() {
                     <Icon name='qrcode' size={28} color='#fff' />
                 </TouchableOpacity>
             </LinearGradient>
+            <View style={{ top: -170 }}>
+                <View style={styles.mainSection}>
+                    <Text style={styles.hello}>Olá, { user.firstName }.</Text>
 
-            <View style={styles.mainSection}>
-                <Text style={styles.hello}>Olá, { user.firstName }.</Text>
-
-                <View style={styles.activityContainer}>
-                    <View style={styles.activityBox}>
-                        <Icon style={styles.activityIcon} name="chevron-up" size={22} color='#0BAB64' />
-                        <View>
-                            <Text style={styles.activityName}>Saldo atual:</Text>
-                            <Text style={styles.activityText}>R$300,00</Text>
+                    <View style={styles.activityContainer}>
+                        <View style={styles.activityBox}>
+                            <Icon style={styles.activityIcon} name="chevron-up" size={22} color='#0BAB64' />
+                            <View>
+                                <Text style={styles.activityName}>Saldo atual:</Text>
+                                <Text style={styles.activityText}>R$300,00</Text>
+                            </View>
                         </View>
-                    </View>
-                    <View style={styles.activityBox}>
-                        <Icon style={styles.activityIcon} name="chevron-up" size={22} color='#0BAB64' />
-                        <View>
-                            <Text style={styles.activityName}>Último uso:</Text>
-                            <Text style={styles.activityText}>R$23,99</Text>
+                        <View style={styles.activityBox}>
+                            <Icon style={styles.activityIcon} name="chevron-up" size={22} color='#0BAB64' />
+                            <View>
+                                <Text style={styles.activityName}>Último uso:</Text>
+                                <Text style={styles.activityText}>R$23,99</Text>
+                            </View>
                         </View>
                     </View>
                 </View>
-            </View>
 
-            <View style={styles.functionsGrid}>
-                <TouchableOpacity style={styles.functionBox}>
-                    <Icon name="donate" size={28} color='#de6262' />
-                    <Text style={styles.functionBoxTitle}>Depositar</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.functionBox}>
-                    <Icon name="tshirt" size={28} color='#de6262' />
-                    <Text style={styles.functionBoxTitle}>Sacar</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.functionBox}>
-                    <Icon name="book" size={28} color='#de6262' />
-                    <Text style={styles.functionBoxTitle}>Extrato</Text>
-                </TouchableOpacity>
-            </View>
+                <View style={styles.functionsGrid}>
+                    <TouchableOpacity style={styles.functionBox}>
+                        <Icon name="donate" size={28} color='#de6262' />
+                        <Text style={styles.functionBoxTitle}>Depositar</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.functionBox}>
+                        <Icon name="tshirt" size={28} color='#de6262' />
+                        <Text style={styles.functionBoxTitle}>Sacar</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.functionBox}>
+                        <Icon name="book" size={28} color='#de6262' />
+                        <Text style={styles.functionBoxTitle}>Extrato</Text>
+                    </TouchableOpacity>
+                </View>
 
-            { ad && (
-                <TouchableOpacity style={styles.adContainer}>
-                    <Image source={{ uri: 'https://i.imgur.com/2Jl7Ohn.png' }} style={styles.ad} />
-                </TouchableOpacity>
-            )}
-        </ScrollView>
+                { ad && (
+                    <TouchableOpacity style={styles.adContainer}>
+                        <Image source={{ uri: 'https://i.imgur.com/2Jl7Ohn.png' }} style={styles.ad} />
+                    </TouchableOpacity>
+                )}
+            </View>
+        </View>
     );
 }
 
@@ -92,8 +90,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff'
     },
     adContainer: {
-        top: -210,
-        flex: 1,
         margin: 25,
         alignItems: 'center',
         backgroundColor: 'white',
@@ -102,8 +98,8 @@ const styles = StyleSheet.create({
     },
     ad: {
         resizeMode: 'cover',
-        width: '100%',
-        height: '100%',
+        width: 361,
+        height: 141,
         borderRadius: 10,
     },
     navbar: {
@@ -126,7 +122,6 @@ const styles = StyleSheet.create({
     },
     mainSection: {
         paddingLeft: 25,
-        top: -170,
     },
     hello: {
         fontSize: 28,
@@ -159,11 +154,11 @@ const styles = StyleSheet.create({
         marginRight: 15
     },
     functionsGrid: {
-        top: -180,
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginTop: 5,
         padding: 25,
+        paddingBottom: 0
     },
     functionBox: {
         alignItems: 'center',
@@ -176,5 +171,5 @@ const styles = StyleSheet.create({
     },
     functionBoxTitle: {
         fontWeight: 'bold'
-    }
+    },
 });
