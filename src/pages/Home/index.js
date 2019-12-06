@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, ScrollView, View, Text, TouchableOpacity, Image } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -9,6 +9,7 @@ import api from '../../config/api';
 export default function Home() {
     const [user, setUser] = useState({});
     const [isGood, setGood] = useState(false);
+    const [ad, setAd] = useState(false);
 
     useEffect(() => {
         async function loadUser() {
@@ -16,13 +17,17 @@ export default function Home() {
 
             response.data.firstName = response.data.name.split(' ')[0]
             setUser(response.data);
+            setAd(true);
         }
         
         loadUser()
     }, []);
 
     return (
-        <View style={styles.container}>
+        <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={styles.container}
+        >
             <LinearGradient
                 style={styles.navbar}
                 colors={['#de6262', '#ffb88c']}
@@ -71,7 +76,13 @@ export default function Home() {
                     <Text style={styles.functionBoxTitle}>Extrato</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+
+            { ad && (
+                <TouchableOpacity style={styles.adContainer}>
+                    <Image source={{ uri: 'https://i.imgur.com/2Jl7Ohn.png' }} style={styles.ad} />
+                </TouchableOpacity>
+            )}
+        </ScrollView>
     );
 }
 
@@ -79,6 +90,21 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff'
+    },
+    adContainer: {
+        top: -210,
+        flex: 1,
+        margin: 25,
+        alignItems: 'center',
+        backgroundColor: 'white',
+        borderRadius: 10,
+        elevation: 5,
+    },
+    ad: {
+        resizeMode: 'cover',
+        width: '100%',
+        height: '100%',
+        borderRadius: 10,
     },
     navbar: {
         flexDirection: 'row',
@@ -111,7 +137,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginRight: 25,
         backgroundColor: 'white',
-        borderRadius: 4,
+        borderRadius: 10,
         elevation: 5,
         flexDirection: 'row',
         alignItems: 'center'
