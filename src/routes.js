@@ -1,23 +1,14 @@
 import React from 'react';
 
-import { createAppContainer } from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import Navigator from './routes/Navigator';
 
-import Home from './pages/Home';
+import FriendCode from './pages/FriendCode';
 
-Home.navigationOptions = {
-    tabBarIcon: <Icon name="home" size={24} color="#de6262" />
-}
-
-const Nav = createBottomTabNavigator({ 
-    Home
-}, {
-    tabBarOptions: {
-        activeTintColor: '#de6262',
-        inactiveTintColor: '#ffb88c',
-    }
+const App = createSwitchNavigator({ 
+    Navigator,
+    FriendCode
 });
 
-export default createAppContainer(Nav);
+export default createAppContainer(App);

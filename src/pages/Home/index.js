@@ -6,10 +6,14 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import api from '../../config/api';
 
-export default function Home() {
+export default function Home({ navigation }) {
     const [user, setUser] = useState({});
     const [isGood, setGood] = useState(false);
     const [ad, setAd] = useState(false);
+
+    function handleTransportToFriendCode() {
+        navigation.navigate('FriendCode');
+    }
 
     useEffect(() => {
         async function loadUser() {
@@ -33,7 +37,7 @@ export default function Home() {
                     <Image source={{ uri: user.avatar_url }} style={styles.userImage} />
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={handleTransportToFriendCode}>
                     <Icon name='qrcode' size={28} color='#fff' />
                 </TouchableOpacity>
             </LinearGradient>
@@ -79,6 +83,49 @@ export default function Home() {
                         <Image source={{ uri: 'https://i.imgur.com/2Jl7Ohn.png' }} style={styles.ad} />
                     </TouchableOpacity>
                 )}
+
+                <View style={styles.servicesContainer}>
+                    <TouchableOpacity style={styles.service}>
+                        <View style={styles.center}>
+                            <View style={styles.serviceIcon}>
+                                <Icon name="film" size={28} color="#de6262" />
+                            </View>
+                            <Text style={styles.serviceText}>Ganhe descontos na rede de cinemas</Text>
+                        </View>
+                        <Icon style={styles.activityIcon} name="chevron-right" size={22} color="#de6262" />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.service}>
+                        <View style={styles.center}>
+                            <View style={styles.serviceIcon}>
+                                <Icon name="plane" size={28} color="#de6262" />
+                            </View>
+                            <Text style={styles.serviceText}>Colecione milhas em linhas aéreas</Text>
+                        </View>
+                        <Icon style={styles.activityIcon} name="chevron-right" size={22} color="#de6262" />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.service}>
+                        <View style={styles.center}>
+                            <View style={styles.serviceIcon}>
+                                <Icon name="gamepad" size={28} color="#de6262" />
+                            </View>
+                            <Text style={styles.serviceText}>Payment Game Pass</Text>
+                        </View>
+                        <Icon style={styles.activityIcon} name="chevron-right" size={22} color="#de6262" />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.service}>
+                        <View style={styles.center}>
+                            <View style={styles.serviceIcon}>
+                                <Icon name="user-friends" size={28} color="#de6262" />
+                            </View>
+                            <Text style={styles.serviceText}>Programa de fidelidade Payment</Text>
+                        </View>
+                        <Icon style={styles.activityIcon} name="chevron-right" size={22} color="#de6262" />
+                    </TouchableOpacity>
+                    
+                </View>
             </View>
         </View>
     );
@@ -91,6 +138,7 @@ const styles = StyleSheet.create({
     },
     adContainer: {
         margin: 25,
+        marginBottom: 0,
         alignItems: 'center',
         backgroundColor: 'white',
         borderRadius: 10,
@@ -101,6 +149,10 @@ const styles = StyleSheet.create({
         width: 361,
         height: 141,
         borderRadius: 10,
+    },
+    center: { 
+        flexDirection: 'row', 
+        alignItems: 'center'
     },
     navbar: {
         flexDirection: 'row',
@@ -171,5 +223,26 @@ const styles = StyleSheet.create({
     },
     functionBoxTitle: {
         fontWeight: 'bold'
+    },
+    servicesContainer: {
+        margin: 25,
+        padding: 15,
+        paddingBottom: 10,
+        borderRadius: 10,
+        backgroundColor: 'white',
+        elevation: 5,
+    },
+    service: { 
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        justifyContent: 'space-between',
+        marginBottom: 5,
+    },
+    serviceText: { 
+        fontWeight: 'bold', 
+        fontSize: 12
+    },
+    serviceIcon: { 
+        marginRight: 10
     },
 });
